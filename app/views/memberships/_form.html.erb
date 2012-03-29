@@ -1,0 +1,18 @@
+<div class='form'>
+  <%= semantic_form_for @membership, :url => account_memberships_path(@account) do |form| %>
+    <%= form.semantic_errors %>
+
+    <% form.inputs do %>
+      <%= form.input :email  %>
+    <% end %>
+    <% form.buttons do %>
+      <%= form.commit_button :button_html=> {:class => 'form_button_blue'} %>
+      -
+      <% if current_developer.admin?  %>
+        <%= link_to 'Sign up new user' , new_developer_registration_path, :class=> 'form_button_dark_grey' %>
+      <% end %>
+      -
+      <%= link_to 'Cancel' , account_memberships_path(@account), :class=> 'form_button_grey' %>
+    <% end %>
+  <% end %>
+</div>

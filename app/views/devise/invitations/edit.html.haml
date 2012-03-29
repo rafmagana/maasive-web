@@ -1,0 +1,31 @@
+#signin_form
+  %a#logo{:href => "#"} MaaSive
+  %h2 Activate Your Account
+
+  = semantic_form_for(resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put }) do |f|
+    = f.hidden_field :invitation_token
+    = devise_error_messages!
+    - f.inputs do
+      = f.input :name, :label_html => { :style => 'width: auto'}
+      = f.input :password, :label_html => { :style => 'width: auto'}
+      = f.input :password_confirmation, :label_html => { :style => 'width: auto'}
+    %label.developer_has_signed_nda{:for => "developer_has_signed_nda"}
+      %input#developer_has_signed_nda{:name => "developer[has_signed_nda]", :type => "checkbox", :value => "1"}
+        I agree to the terms of the #{link_to 'NDA', nda_path, :target => '_blank'}
+
+    - f.buttons do
+      = f.commit_button 'Create Account'
+    .sub_links
+      Already have an account
+      = link_to "log in here", new_developer_session_path
+      %br
+      // TODO make this a link to forgot page. devise link wants resource name?
+      = link_to "Forgot your password?", "#"
+
+%script{:charset => "utf-8", :type => "text/javascript"}
+  $(function() {
+  DRMagicLabelWizzler('#developer_name_input');
+  DRMagicLabelWizzler('#developer_password_input');
+  DRMagicLabelWizzler('#developer_password_confirmation_input');
+  });
+

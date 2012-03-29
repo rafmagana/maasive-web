@@ -1,0 +1,11 @@
+<div id="app_dashboard">
+  <h2>New Developer for <%= @account.name %></h2>
+  </br>
+  <%= render :partial => 'form' %>
+
+  <% if current_developer.admin?  %>
+
+  <% else  %>
+    *Registration is currently invite only
+  <% end  %>
+</div>

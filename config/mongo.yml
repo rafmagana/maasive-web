@@ -1,0 +1,23 @@
+# Set these environment variables accordingly
+
+development:
+  host: 127.0.0.1
+  port: 27017
+  database: maasive_api_development
+
+test:
+  host: 127.0.0.1
+  port: 27019
+  database: maasive_api_test
+  
+staging:
+  host: 127.0.0.1
+  database: maasive_api_staging
+  username: 
+  password: 
+
+production:
+  host: 127.0.0.1
+  database: maasive_api_production
+  username: 
+  password: 

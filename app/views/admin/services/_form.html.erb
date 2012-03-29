@@ -1,0 +1,33 @@
+<div class='form'>
+  <%= semantic_form_for @service, :url => url do |form| %>
+    <%= form.semantic_errors %>
+
+    <%= form.inputs do %>
+    
+      <% unless @service.new_record? %>
+    
+        <li class="string required" id="service_title_input">
+          <label for="service_title">Service Key</label>
+          <%= @service.service_key %>
+        </li>
+        
+      <% end %>
+      
+       <%= form.input :title %>
+       <%= form.input :subtitle %>
+
+       <%= render :partial => 'admin/service_documentation/form',
+                    :locals => {:form => form} %>
+
+       <%= form.input :base_url, :as => :string %>
+       <%= form.input :base_port %>
+       
+       <%= form.input :beta_level %>
+    <% end %>
+    <% form.buttons do %>
+      <%= form.commit_button :button_html=> {:class => 'form_button_blue'} %>
+      <%= link_to 'Cancel' , admin_services_path(@account), :class=> 'form_button_grey' %>
+      <%= link_to('Delete', admin_service_path(@service), :'data-method' => 'delete', :'data-cofirm' => 'Are you sure?', :rel => 'nofollow') unless @service.new_record? %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<h3>Developers</h3>
+<div class='admin_index'>
+  <ul>
+    <% @developers.each do |dev| %>
+      <li>
+        <b><%= dev.name %></b> 
+        <span class='aux_text' style='padding-left:8px;color:#687F94;'><%= dev.email %></span>
+        <span class='aux_text' style='padding-left:8px;color:#687F94;'><%= link_to "Edit", edit_admin_developer_path(dev) %></span>
+        <span class='aux_text' style='padding-left:8px;color:#940006;'><%= link_to "!!Hijack User!!", hijack_admin_developer_path(dev) %></span>
+        <% if dev.invite_request and dev.encrypted_password.blank?%>
+          <span class='aux_text' style='padding-left:8px;color:#940006;'><%= link_to "Resend invitation", invite_admin_invite_request_path(dev.invite_request) %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  </br>
+  <%= link_to "Invite", new_admin_developer_path, :class => 'new_sub_header_button' %>
+  <%= link_to "Bulk Invite", import_admin_developers_path, :class => 'new_sub_header_button' %>
+</div>

@@ -1,0 +1,18 @@
+.services_index
+  .left_content
+    %h3 Current Services:
+    %br
+    - @current_services.each do |service|
+      .service
+        = link_to "Edit", edit_app_service_service_connections_path(current_app.identifier, service), :class => 'view_button'
+        %h4= service.title
+        = service.subtitle
+  .right_content
+    %h3 Available Services:
+    %br
+    - @services.each do |service|
+      .service
+        = link_to "Add", app_service_service_connections_path(current_app.identifier, service), :class => 'view_button'
+        -# = link_to "Documentation", admin_service_documentation_path(service.service_documentation_page), :class => 'doc_button'
+        %h4= service.title
+        = service.subtitle

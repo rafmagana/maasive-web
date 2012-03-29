@@ -1,0 +1,8 @@
+Select an App you'd like this Service enabled for:
+<br/>
+
+<%= form_for :account, :url => add_service_url(@service) do |f| %>
+  <%= collection_select(:app, :id, current_developer.apps, :id, :name, :prompt => true) %>
+  <br/>
+  <%= submit_tag "Add Service" %>
+<% end %>

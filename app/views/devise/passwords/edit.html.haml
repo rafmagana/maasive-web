@@ -1,0 +1,23 @@
+#signin_form
+  %a#logo{:href => "#"} MaaSive
+  %h2 Change your password:
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+    = f.hidden_field :reset_password_token
+    
+    %ol
+      %li
+        = devise_error_messages!
+      %li#new_password
+        = f.label :password, "New password"
+        = f.password_field :password
+      %li#new_password_conf
+        = f.label :password_confirmation, "Confirm new password"
+        = f.password_field :password_confirmation
+      %li
+        = f.submit "Save", :class => "create"
+  = render :partial => "devise/shared/links"
+%script{:charset => "utf-8", :type => "text/javascript"}
+  $(function() {
+  DRMagicLabelWizzler('#new_password');
+  DRMagicLabelWizzler('#new_password_conf');
+  });

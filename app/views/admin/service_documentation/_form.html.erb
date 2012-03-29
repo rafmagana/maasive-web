@@ -1,0 +1,6 @@
+<%= form.fields_for :service_documentation_page do |doc_form| %>
+  <li class="string optional">
+    <%= doc_form.label :markdown, 'Documentation:' %>
+    <%= doc_form.text_area :markdown, :style => 'width:74%;' %>
+  </li>
+<% end %>

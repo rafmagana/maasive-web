@@ -1,0 +1,25 @@
+<div class="services_index">
+
+  <div class='left_content'>
+    <h2>Current Services:</h2>
+      <% @current_services.each do |service| %>
+        <div class='service'>
+          <%= link_to "View", app_service_service_connections_path(current_app.identifier, service), :class => 'view_button' %>
+          <h4><%= service.title %></h4>
+          <%= service.subtitle %>
+        </div>
+      <% end %>
+  </div>
+  
+  <div class='right_content'>
+    <h2>Available Services:</h2>
+      <% @services.each do |service| %>
+        <div class='service'>
+          <%= link_to "Add", app_service_service_connections_path(current_app.identifier, service), :class => 'view_button' %>
+          <h4><%= service.title %></h4>
+          <%= service.subtitle %>
+        </div>
+      <% end %>
+  </div>
+  
+</div>

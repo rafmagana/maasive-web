@@ -1,0 +1,96 @@
+#endpoint
+  #endpoint_header
+    .left
+      %select#endpoints
+        - @api_tables_last_versions.each do |a|
+          %option{:value => endpoint_path(current_app, a), :selected => (a.name == params[:name] ? "selected" : nil)}
+            = a.name
+
+    .right
+      = # link_to "<", endpoint_path(current_app, @api_tables_for_current_endpoint.first)
+      Version
+      %select#versions
+        - @api_tables_for_current_endpoint.each do |a|
+          %option{:value => endpoint_path(current_app, a), :selected => (a.version_hash == params[:version_hash] ? "selected" : nil)}
+            = a.version_hash[0..7]
+            Created at
+            = a.created_at
+      = link_to "Export to CSV", "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}.csv"
+
+      = # link_to ">", endpoint_path(current_app, @next_api_table)
+  #endpoint_filter
+    %form#endpoint_filters{:action => endpoint_path(current_app, @api_table), :method => "GET"}
+      #filter_container
+      #endpoint_filters_footer
+        .left
+          = link_to "Add filter", "#", :class => 'add_filter'
+          |
+          = link_to "Reset",  "#", :class => 'endpoint_reset'
+        .right
+          = submit_tag "Search"
+
+    #filter_template
+      .endpoint_filter
+        .left
+          %select{ :id => raw("column_{{ filter }}"), :name => raw("column_{{ filter }}"), :class => 'column_select' }
+            = options_from_collection_for_select(@api_table.schema.map { |a| a }, "first", "first")
+          - @api_table.schema.each do |k,v|
+            %span.operator_value{ :'data-for' => k }
+              = select_tag_for_schema(k,v)
+
+        .right
+          = link_to "+", "#", :class => 'add_filter'
+          = link_to "-", "#", :class => 'remove_filter'
+
+  #endpoint_table_container
+    .endpoint_table_scoll_container
+      .endpoint_scrollbar
+        &nbsp;
+    %table#endpoint_table
+      %thead
+        %tr
+          %th ID
+          - @api_table.schema.each do |k, v|
+            %th= k
+          %th.last
+            .actions
+              Actions
+
+      %tbody
+        - @instances.each do |instance|
+          %tr
+            %td= instance._id
+            - @api_table.schema.each do |k, v|
+              %td= instance.send(k)
+
+            %td.last
+              .actions
+                = link_to "Edit", "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/#{instance.id}/edit", :class => 'lil_action edit'
+                %a{:class => 'lil_action delete', :href => "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/#{instance.id}", :'data-method' => 'delete', :rel => 'nofollow', :'data-confirm' => "Are you sure?"} Delete
+    .endpoint_table_scoll_container
+      .endpoint_scrollbar
+        &nbsp;
+  
+  #endpoint_footer
+    .left
+      = link_to "New #{params[:name]}", "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/new", :class => 'main_button'
+      
+    .right
+      #showing
+        == Showing #{@instances.size} of #{@instances.total_entries}
+      #per_page_settings
+        View per page:
+        = params[:per_page] == "10" ? "10"   : (link_to "10", "?per_page=10&page=1")
+        = (params[:per_page].nil? || params[:per_page] == "25") ? "25"   : (link_to "25", "?per_page=25&page=1")
+        = params[:per_page] == "50" ? "50"   : (link_to "50", "?per_page=50&page=1")
+        = params[:per_page] == "100" ? "100" : (link_to "100", "?per_page=100&page=1")
+      #page_selector
+        = link_to "<", "?page=#{@instances.current_page - 1 }" unless (@instances.current_page - 1) < 1
+        = page_links_for(@instances)
+        = link_to ">", "?page=#{@instances.current_page + 1 }" unless (@instances.current_page + 1) >= @instances.total_pages
+      
+:javascript
+  new EndPointTable()
+  new JPShizzleScrollWizzle($('#endpoint_table'), $('.endpoint_table_scoll_container'), $('.endpoint_scrollbar'));	
+  
+  

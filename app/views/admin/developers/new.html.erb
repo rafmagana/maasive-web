@@ -1,0 +1,14 @@
+<div class='form'>
+  <% semantic_form_for @developer, :url => admin_developers_path do |form| %>
+    <%= @developer.errors.full_messages.to_sentence %>
+
+    <%= form.semantic_errors %>
+  
+    <%= form.inputs :email %>
+  
+    <% form.buttons do %>
+      <%= form.commit_button :button_html => {:class => 'form_button_blue'}, :label => "Invite" %>
+      <%= link_to 'Cancel' , admin_developers_path, :class=> 'form_button_grey' %>
+    <% end %>
+  <% end %>
+</div>

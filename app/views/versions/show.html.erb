@@ -1,0 +1,12 @@
+<ul>
+  <% t = @version.api_table %>
+  <h3><%= link_to t.name, "/apps/#{params[:app_id]}/versions/#{params[:id]}/#{t.name}" %></h3>
+  <div>
+    <table border="0">
+      <tr><th>Column</th><th>Type</th></tr>
+      <% t.schema.each do |c, t| %>
+        <tr><td><%= c %></td><td><%= t %></td></tr>
+      <% end %>
+    </table>
+  </div>
+</ul>

@@ -1,0 +1,275 @@
+#charts-container
+  #chart-container-1
+  #device_stats{:style => "width: 70%; float: left"}
+  #table_stats{:style => "width: 28%; float: right"}
+
+:javascript
+  Highcharts.setOptions({
+      colors: [{
+              linearGradient: [0, 0, 0, 500],
+              stops: [
+                  [0, '#B5D6F1'],
+                  [1, '#A4C8E0']
+              ]
+          }, {
+              linearGradient: [0, 0, 0, 500],
+              stops: [
+                  [0, '#93C7EC'],
+                  [1, '#83B7D8']
+              ]
+          }, {
+              linearGradient: [0, 0, 0, 500],
+              stops: [
+                  [0, '#6DB8E6'],
+                  [1, '#64B1D8']
+              ]
+          }, {
+              linearGradient: [0, 0, 0, 500],
+              stops: [
+                  [0, '#27AAE1'],
+                  [0, '#1FA3D1']
+              ]
+          }]   
+  });
+      
+  
+  
+  var chart1; // globally available
+  $(document).ready(function() {
+        var hours = [];
+        var current_date = new Date(new Date - 43200000);
+        for (var count=0; count< 12; count=count+1 ) {
+          current_date = new Date(current_date - (-3600000));
+          var hour = current_date.getHours();
+          if (hour == 0) hour = 24;
+          hours.push(hour+":00");
+        }
+        
+       
+       
+        chart1 = new Highcharts.Chart({
+           chart: {
+              renderTo: 'chart-container-1',
+              defaultSeriesType: 'spline',
+              backgroundColor: 'rgba(16, 16, 16, 0)',
+              marginRight: '20'
+           },
+           tooltip: {
+                   formatter: function() {
+                      if (this.y == 1) { 
+                        return 'There was <b>'+ this.y +
+                         '</b> request at <b>'+ this.x +'</b>'
+                      } else {   
+                        return 'There were <b>'+ this.y +
+                          '</b> requests at <b>'+ this.x +'</b>' 
+                      }
+                   }
+               },
+           legend: {
+                   enabled: true,
+                   borderWidth: 0,
+                   itemHoverStyle: {
+                   	        color: '#908485'
+                   },
+                   itemStyle: {
+                   	        cursor: 'pointer',
+                   	        color: '#CCCCCC'
+                   }
+                   
+               },
+           title: {
+              text: 'Requests in the last 12 hours',
+              style: {
+                           color: '#CCCCCC',
+                           shadow: true,
+                           fontSize: '13px'
+                       }
+           },
+           xAxis: {
+              title: {
+                text: 'Hour',
+                style: {
+                            color: '#CCCCCC',
+                            shadow: true,
+                            fontSize: '13px',
+                       }
+              },
+              lineColor: '#E6E7E8',
+              lineWidth: 1,
+              gridLineColor: '#E6E7E8',
+              gridLineWidth: 1, 
+              tickColor: '#E6E7E8',
+              categories: hours
+           },
+           yAxis: {
+              title: {
+                 text: 'Requests',
+                 style: {
+                              color: '#CCCCCC',
+                              shadow: true,
+                              fontSize: '13px'
+                        }
+              },
+              lineColor: '#E6E7E8',
+              lineWidth: 1,
+              gridLineColor: '#E6E7E8',
+              gridLineWidth: 1
+           },
+           credits: {
+             enabled: false
+           },
+           series: [{
+               name: 'Requests',
+               data: [9.0,30.0,9.0,13.0,11.0,17.0,10.0,36.0,8.0,19.0,4.0,4.0],
+               marker: {
+                 fillColor: '#687F94'
+               }
+             }
+           ]
+        });
+
+
+       
+       
+        chart2 = new Highcharts.Chart({
+          chart: {
+            renderTo: 'device_stats',
+            backgroundColor: 'rgba(16, 16, 16, 0)',
+            plotBorderWidth: null,
+            plotShadow: false
+          },
+          title: {
+            text: 'Device type',
+            style: {
+                         color: '#ccc',
+                         fontSize: '13px'
+                     }
+          },
+          subtitle: {
+            text: 'today',
+            style: {
+                         color: '#908485',
+                         fontSize: '11px'
+                     }
+          },
+          tooltip: {
+            formatter: function() {
+              return '<b>'+ this.point.name +'</b>: '+ this.y +'';
+            }
+          },
+          plotOptions: {
+            pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                enabled: true,
+                color: '#908485',
+                connectorColor: '#908485',
+                formatter: function() {
+                  return '<b>'+ this.point.name +'</b>: '+ this.y +'';
+                }
+              },
+              borderWidth: 0,
+              
+            }
+          },
+          credits: {
+            enabled: false
+          },
+            series: [{
+              type: 'pie',
+              name: 'Browser share',
+              data: [["iPhone OS (4.2.1)",7.0],["iPhone OS (4.3.1)",6.0],["iPhone OS (4.3.2)",14.0],["iPhone OS (4.3.3)",39.0],["iPhone OS (4.3.5)",19.0],["iPhone OS (5.0)",134.0],["Windows Phone 7 (5.0)",50.0],["Android (5.0)",50.0]]
+          }]
+        });
+        
+        
+        
+        
+        
+        chart3 = new Highcharts.Chart({
+          chart: {
+            renderTo: 'table_stats',
+            marginRight: '20',
+            backgroundColor: 'rgba(16, 16, 16, 0)',
+            defaultSeriesType: 'bar'
+          },
+          legend: {
+                   enabled: true,
+                   borderWidth: 0,
+                   itemHoverStyle: {
+                   	        color: '#908485'
+                   },
+                   itemStyle: {
+                   	        cursor: 'pointer',
+                   	        color: '#CCCCCC'
+                   }
+                   
+               },
+          title: {
+            text: 'Table Usage',
+            style: {
+                         color: '#CCCCCC',
+                         fontSize: '13px'
+                     }
+          },
+          subtitle: {
+            text: 'today',
+            style: {
+                         color: '#908485',
+                         fontSize: '11px'
+                     }
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: 'Requests',
+              style: {
+                           color: '#908485',
+                           fontSize: '11px'
+                       },
+              align: 'middle'          
+            },
+            lineColor: '#E6E7E8',
+            lineWidth: 1,
+            gridLineColor: '#E6E7E8',
+            gridLineWidth: 1
+          },
+          xAxis: {
+            lineColor: '#E6E7E8',
+            lineWidth: 1,
+            gridLineColor: '#E6E7E8',
+            tickColor: '#E6E7E8',
+            labels: {
+                        enabled: false
+                    }
+            
+          },
+          tooltip: {
+            formatter: function() {
+              return ''+
+                 this.series.name +': '+ this.y +'';
+            }
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                enabled: true,
+                color: '#908485'
+              },
+              borderWidth: 0
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          series: [{"name":"endpoint","data":[319.0]}]
+        });
+
+
+
+
+
+
+
+      });

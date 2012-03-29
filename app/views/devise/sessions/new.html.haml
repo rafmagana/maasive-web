@@ -1,0 +1,18 @@
+#signin_form
+  %a#logo{:href => "#"} MaaSive
+  %h2 Sign in
+  = semantic_form_for resource, :as => resource_name, :url => session_path(resource_name) do |form|
+    - form.inputs do
+      = form.input :email, :label_html => { :style => 'width: auto'}
+      = form.input :password, :label_html => { :style => 'width: auto'}
+    - form.buttons do
+      = form.commit_button "Sign in"
+  Don't have a Beta account? 
+  = link_to "Request Invite", "/"
+  %br
+  = render :partial => "devise/shared/links"
+%script{:charset => "utf-8", :type => "text/javascript"}
+  $(function() {
+  DRMagicLabelWizzler('#developer_password_input');
+  DRMagicLabelWizzler('#developer_email_input');
+  });

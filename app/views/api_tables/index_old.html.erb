@@ -1,0 +1,35 @@
+<div>
+  <% if @api_tables.empty? %>
+    <div class='empty_api_tables'>
+    You currently do not have any tables for this App
+    </div>
+  <% else %>
+    <% @api_tables.each do |name, versions| %>
+       <div class="api_table_container">
+         <div class='table_actions'>
+           <%= link_to "Delete Table", destroy_all_app_api_table_path(current_app.identifier, name), :"data-method" => 'delete', :rel => 'nofollow', :'data-confirm' => "Are you sure?", :class => 'form_button_red small'%>
+         </div>
+         
+         <h3>
+           <%= name %>
+         </h3>
+
+         <table class='api_table'>
+           <tr class="api_table_header">
+               <th>Columns</th>
+               <th>Version</th>
+               <th>Created</th>
+               <th> </th>
+           </tr>
+           <% versions.each do |version| %>
+               <tr class="api_table_row" onClick="window.location='<%="/apps/#{params[:app_id]}/versions/#{version.version_hash}/#{name}"%>'">
+                 <td class="api_table_columns"><%= version.schema.keys.join(', ') %></td>
+                 <td class="api_table_version"><b><%= version.version_hash[0..5] %></b></td>
+                 <td class="api_table_created"><%= distance_of_time_in_words((version.created_at || Time.now) - Time.now) %> ago</td>
+               </tr>
+           <% end %>
+         </table>
+       </div>  
+     <% end %>
+  <% end  %>
+</div> 

@@ -1,0 +1,70 @@
+<% ep_table_width = 860 %>
+<% count = @api_table.schema.keys.size %>
+<% column_size = ep_table_width/count %>
+
+<% if @errors %>
+  <div id="errors">
+    <%- @errors.each do |error| %>
+      <div class='error'>
+        <%= error %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="ep_table_container">
+  <div class='ep_table_header'>
+    <div class="ep_metainfo">
+          <%= params[:version_hash] %>
+          <span class='created_in_words'>created <%= distance_of_time_in_words((@api_table.created_at || Time.now) - Time.now) %> ago</span>
+          <%= link_to "Delete Version", app_api_table_path(current_app.identifier, @api_table.version_hash, :name => params[:name]), :"data-method" => 'delete', :rel => 'nofollow', :'data-confirm' => "Are you sure?", :class => 'form_button_red small'%>
+    </div>
+    
+    <div class='table_title'>
+      <%= params[:name].titleize %>
+    </div>
+  </div>
+  
+ 
+  <div class="ep_scroll_container" id='ep_scroll_container'>
+    <table class='ep_table'>
+      <thead>    
+        <tr class="">
+            <th> ID </th>
+            <% @api_table.schema.each do |k, v| %> <th><%= k %></th> <% end %>
+            <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>  
+        <% @instances.each do |instance|  %>
+          <tr class='ep_table_row'>
+            <td> <%= instance._id %> </td>
+            <% @api_table.schema.each do |k, v| %>
+              <% if v == 'EncryptedString' %>
+                <td> HIDDEN </td>
+              <% else %>
+                <td> <%= instance.send(k) %> </td>
+              <% end %>
+            <% end %>
+            <td>
+              <div class="ep_actions">
+                <%= link_to "Edit", "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/#{instance.id}/edit", :class => 'lil_action edit' %>
+                <a class='lil_action delete' href="<%= "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/#{instance.id}" %>" data-method="delete" rel="nofollow" data-confirm="Are you sure?">Delete</a>
+              </div>
+            </td>
+          </tr>
+        <%end %>
+      </tbody>
+    </table>
+  </div>
+  <div class='ep_scrollbar_container'>
+    <div class='ep_scrollbar'>
+      &nbsp;
+    </div>
+  </div>
+  
+</div>
+
+<br/>
+
+<%= link_to "New", "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/new", :class => 'form_button_blue' %>

@@ -1,0 +1,16 @@
+#signin_form
+  %a#logo{:href => "#"} MaaSive
+  %h2 Forgot your password?
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
+    %ul
+      %li#forgot_fields
+        = f.label :email
+        = f.email_field :email
+      %li
+        = f.submit "Send me reset password instructions", :class => "create reset_pass"
+  = render :partial => "devise/shared/links"
+%script{:charset => "utf-8", :type => "text/javascript"}
+  $(function() {
+  DRMagicLabelWizzler('#forgot_fields');
+  });

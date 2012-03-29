@@ -1,0 +1,24 @@
+#help_center_container
+  .left_content
+    = render :partial => 'sections_menu'
+
+  .right_content
+    .right_inner_content
+      .help_section
+        %h4 Recommended
+        .help_section_body
+          %ul
+            - @recommended.each do |page|
+              %li= link_to page.title, documentation_path(page)
+      #search_results
+
+:javascript
+  $(document).ready(function() {
+
+    $('.doc_nav h4').click(function() {
+      var p = $(this).parent();
+      p.find('ul').toggle();
+      $(this).toggleClass('collapsed');
+    });
+
+  });

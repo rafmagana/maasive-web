@@ -1,0 +1,17 @@
+%header.accounts_header
+  .accounts
+    %header.account_header
+      %h2
+        Latest Apps
+    .left_content
+      .apps
+        %header.app_header
+        - @apps.each do |app|
+          .app
+            %h3= link_to app.name, app_statistics_path(:app_id => app.identifier), :class => ''
+            = link_to "Statistics", app_statistics_path(:app_id => app.identifier), :class => ''
+            = link_to "Tables",     app_api_tables_path(:app_id => app.identifier), :class => ''
+            - if current_developer.has_access_to_beta_level(BetaAccess::Services)
+              = link_to "Services",   app_services_path(:app_id => app.identifier), :class => ''
+            = link_to "Keys", app_path(app.identifier), :class => ''
+            = link_to "Edit App", edit_app_path(app.identifier), :class => ''

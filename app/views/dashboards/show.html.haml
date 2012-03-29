@@ -1,0 +1,79 @@
+= javascript_include_tag 'twitter-text-widget'
+
+.container
+  - if @accounts.first.apps.count == 0
+    #get_started_banner
+      .welcome_message
+        %h2 Welcome To MaaSive
+        %p
+          Use these 
+          %b quickstart guides 
+          to walk you through your first steps with MaaSive.
+      = link_to "iOS Quickstart", "/documentation/getting-started-ios", :class => "qs_link ios"
+      = link_to "Android Quickstart", "/documentation/getting-started-android", :class => "qs_link android"
+      = link_to "Windows Phone 7 Quickstart", "/documentation/getting-started-windows-phone-7", :class => "qs_link win"
+  
+  #dashboard
+  
+    #dash_left
+    
+      %header.accounts_header
+        = link_to "+ Account", new_account_path(), :class => 'main_button'
+        %h3 My Accounts
+        
+      - @accounts.each do |acct|
+        - if acct.apps.present? or acct.developers.include? current_developer
+          .accounts
+            %header.account_header
+              %h2
+                = acct.name
+                = link_to "Edit", edit_account_path(:id => acct.id), :class => 'header_button'
+            .left_content
+              .apps
+                %header.app_header
+                  = link_to "+ App", new_app_path(), :class => 'new_sub_header_button'
+                  %h4 Apps
+                - if acct.apps.blank?
+                  .app.no_apps
+                    This account has no apps yet. Add one here.
+                - acct.apps.each do |app|
+                  .app
+                    %h3= link_to app.name, app_statistics_path(:app_id => app.identifier), :class => ''
+                    = link_to "Statistics", app_statistics_path(:app_id => app.identifier), :class => ''
+                    = link_to "Tables",     app_api_tables_path(:app_id => app.identifier), :class => ''
+                    - if current_developer.has_access_to_beta_level(BetaAccess::Services)
+                      = link_to "Services",   app_services_path(:app_id => app.identifier), :class => ''
+                    = link_to "Keys", app_path(app.identifier), :class => ''
+                    = link_to "Edit App", edit_app_path(app.identifier), :class => ''
+        
+            .right_content
+              .developers
+                %header.developers_header
+                  = link_to "Add/Remove Developers", account_memberships_path(:account_id => acct.id), :class => 'edit_sub_header_button'
+                  %h4 Developers
+                %ul
+                  - acct.developers.each do |dev|
+                    %li.developer
+                      .dev_name
+                        = dev.name
+                        %span.dev_email= dev.email
+                  %ul
+                    .add_developer{:style => "display: none;"}
+                      CONTENT
+              - unless acct.services.empty?
+                .services
+                  %header.services_header
+                    = link_to "+ Service", new_account_service_path(:account_id => acct.id), :class => 'new_sub_header_button'
+                    %h4 Services
+                  %h5 Services you develop
+                  %ul.last
+                    - acct.services.each do |service|
+                      %li
+                        %span.dev_email= link_to service.title, edit_account_service_path(acct, service), :class => 'edit_sub_header_button'
+
+
+    %aside#dash_right
+      %h3 News Feed
+      #newsfeed
+        = javascript_tag do
+          new TWTR.Widget({version: 2,type: 'profile',rpp: 5,interval: 30000,width: 300,theme: {shell: {background: '#fff',color: '#333'},tweets: {background: '#fff',color: '#333',links: '#009cd4'}},features: {loop: false, live: false, behavior: 'all'}}).render().setUser('maasive').start();

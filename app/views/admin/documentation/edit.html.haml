@@ -1,0 +1,9 @@
+.form
+  - semantic_form_for @doc, :url => documentation_path(@doc) do |form|
+    = @doc.errors.full_messages.to_sentence
+  
+    = form.inputs :title, :markdown, :recommended, :section_title, :live, :position
+  
+    - form.buttons do
+      = form.commit_button :button_html => {:class => 'form_button_blue'}, :label => "Save"
+      = link_to 'Cancel' , documentation_path(@doc), :class=> 'form_button_grey'

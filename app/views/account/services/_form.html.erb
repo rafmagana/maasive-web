@@ -1,0 +1,17 @@
+<div class='form'>
+  <%= semantic_form_for @service, :url => url do |form| %>
+    <%= form.semantic_errors %>
+
+    <%= form.inputs do %>
+       <%= form.input :title %>
+       <%= form.input :subtitle %>
+       <%= form.input :description %>
+       <%= form.input :base_url, :as => :string %>
+       <%= form.input :base_port %>
+    <% end %>
+    <% form.buttons do %>
+      <%= form.commit_button :button_html=> {:class => 'form_button_blue'} %>
+      <%= link_to 'Cancel' , account_services_path(@account), :class=> 'form_button_grey' %>
+    <% end %>
+  <% end %>
+</div>

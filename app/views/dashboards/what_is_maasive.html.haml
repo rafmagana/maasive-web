@@ -1,0 +1,77 @@
+#what_is_maasive
+  #vision.container
+    .content
+      %h1 MAASIVE realizes your vision in the Cloud. Fast.  
+      %h3 MAASIVE enables developers to create cloud-based mobile applications with unprecedented speed while providing scalability and performance.
+    .image
+
+  %section#cross_platform    
+    .container
+      .content
+        %h2 Cross Platform Native-Object Architecture      
+        .image
+        .code_examples
+          .type.ios
+            .row
+              %span.blue @interface 
+              %span.un Product 
+              %i : MaaSModel
+            .row.ind            
+              %span.blue @property(nonatomic,retain) 
+              %span.light_blue NSString 
+              %span name;
+            .row
+              %span.blue @end
+          .type.android
+            .row
+              %span.blue public class 
+              %span.un Product 
+              %span extends 
+              %i MaaSModel {
+            .row.ind
+              %span.blue private String 
+              %span name;
+            .row
+              }
+          .type.win7
+            .row
+              %span.blue public class 
+              %span.un Product 
+              %span: MaaSModel<Product> {
+            .row.ind            
+              %span.blue public 
+              %span string 
+              %span.blue Name 
+              %span { get; set; }
+            .row
+            }
+        .text_container
+          %p 
+            MAASIVE’s service enables developers to share native class instances (Objective-C, Java, C 
+            &#35
+            ) across multiple runtimes automatically. For example, a native Objective-C object with multiple complex and simple attributes can be stored on MAASIVE’s backend solution, and when queried by an Android application it will be instantiated as a native Java object with the same attributes and corresponding values. MAASIVE performs the translation of the object from iOS to Android automatically and transparently. This unique approach leverages the object-oriented aspects of each individual language and ensures that business logic is declared in a consistent manner.
+  
+  %section#safer_code      
+    .container
+      %h2 Safer Code and Easier Cross Platform Development
+      .text_container
+        %p.column Our approach enables the developer to manipulate data with the the same object-oriented approach as they are used to with their mobile development language. With the Key/Value approach, your functional code ends up declaring your classes schema. MaaSive’s philosophy is that a class schema should exist in one place, which is the class declaration itself. For multi-platform development, this is important for reducing complexity and errors. For example, porting an iOS application to Android, an Android developer can simply refer to the iOS class definitions, then start building functional code. With the Key/Value approach, the Android developer  
+        %p.column cannot refer to class definitions, and must dig into functional iOS code. This is because the arbitrary keys that are required to store and retrieve Key/Value pairs can be embedded in any portion of the code. MaaSive’s native object approach eliminates the need for arbitrary keys entirely. This philosophy is reinforced by the MVC paradigm. With the Native Class approach, business definitions are strictly enforced and isolated in a given Model. The Key/Value approach can potentially end up spreading the business definitions of the given Model, across multiple Models, Views, Controllers and Platforms.
+      .image
+      .text_container
+        %p The Native approach results in less code since native objects are automatically populated with member data. Leveraging native objects also provides the ability to re-use backend-enabled classes and inherit from them.
+        
+  %section#optimization
+    .container
+      .image
+      .content
+        %h2 Bandwidth Optimization and Offline Operations
+        %p Our solution provides automatic and transparent intelligent caching of objects. If the object that is being accessing has not changed on the server, our platform automatically senses this and will use the local version on the client. This helps reduce bandwidth utilization which can result in improved battery life. This optimization can be turned on or off easily by the developer. MAASIVE’s native object approach enables us to implement this efficiently, and we intend to provide a roadmap of future performance optimizations. The architecture also enables this optimization to be enabled on a per object basis
+        %p We have leveraged our extensive experience in creating scalable high performance backends for Fortune 500 companies to focus on performance required for the most demanding mobile applications.
+  
+  %section#analytics        
+    .container
+      %h2 Powerful Analytics
+      %p With only a few lines of code MAASIVE automatically generates device and usage centric analytics. MAASIVE also provides methods to enable developers to keep statistics on user input to understand engagement and user behavior. The guys at AutoCorrector were able to integrate powerful analytics into their existing app very quickly. The usage data they got in return helped them make big decisions about where to take their product.
+      %h3 Example of our analytics
+      = render :partial => "demo_stats"

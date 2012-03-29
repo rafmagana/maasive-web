@@ -1,0 +1,11 @@
+
+<h3>Services</h3>
+<div class="service_index">
+  <% @services.each do |service| %>
+    <div class='service'>
+      <%= link_to "Edit", edit_account_service_path(@account, service), :class => 'view_button' %>
+      <h4><%= service.title %></h4></br>
+      <%= service.subtitle %>
+    </div>
+  <% end %>
+</div>

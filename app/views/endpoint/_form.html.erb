@@ -1,0 +1,73 @@
+<div class='form'>
+  <% if @instance.new_record? %>
+    <% form_url = "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}"%>
+    <% method = "POST" %>
+  <% else %>
+    <% form_url = "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}/#{@instance.id}"%>
+    <% method = "PUT" %>
+  <% end %>
+
+  <%= semantic_form_for params[:name], @instance, {:html => { :method => method },:url => form_url} do |f| %>
+    <% f.inputs do %>
+      <% @api_table.schema.each do |k,v| %>
+        <% case v %>
+        <% when "EncryptedString" %>
+          <%= f.input "#{k}_encrypt", :as => :password, :input_html => {:value => ""}, :label => k.titleize %>
+          <li>The <%= k %> field has one way encryption. Leave blank to leave unchanged.</li>
+        <% when "Boolean" %>
+          <%= f.input k, :as => :boolean %> 
+        <% when "Date" %>
+          <%= f.input "#{k}_epoc", :as => :hidden %>
+          <li class='datetime optional'>
+            <fieldset>
+              <legend class="label"><label for="<%="#{params[:name].titleize}_#{k}"%>"><%= k %> (UTC)</label></legend>
+              <ol>
+                <li>
+                  <%= datetime_select "_#{params[:name].titleize}", k, {:start_year => 1900, :end_year => 2100, :default => @instance.send(k)} %>
+                </li>
+              </ol>
+            </fieldset>
+          </li>
+        <% else %>
+          <%= f.input k %>
+        <% end %>
+      <% end %>
+    <% end %>
+  
+    <% f.buttons do %>
+      <%= f.commit_button :button_html=> {:class => 'form_button_blue'} %>
+      <%= link_to 'Cancel' , "/apps/#{params[:app_id]}/versions/#{params[:version_hash]}/#{params[:name]}", :class=> 'form_button_grey' %>
+    <% end %>
+  <%- end %>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  var form = $('form');
+  
+  normalize_dates = function() {
+    $('.datetime').each(function() {
+      var base_attr = $('label', this).attr('for');
+      
+      try {
+        var year   = $('#_'+base_attr+'_1i',this).val();
+        var month  = $('#_'+base_attr+'_2i',this).val();
+        var day    = $('#_'+base_attr+'_3i',this).val();
+        var hour   = $('#_'+base_attr+'_4i',this).val();
+        var second = $('#_'+base_attr+'_5i',this).val();
+        
+        var dstring = (month + "/"+ day+"/" + year + " " + hour + ":" + second+ " UTC");
+        
+        var date   = Date.parse(dstring)// - ((new Date()).getTimezoneOffset() * 60000);
+        
+        $('#'+base_attr+"_epoc").val(date);
+      } catch(e) {
+        alert("Count not save "+ base_attr);
+        $('#'+base_attr+"_epoc").val(null);
+      }
+    });
+    
+    return true;
+  };
+
+  form.bind('submit', normalize_dates);
+</script>

@@ -1,0 +1,18 @@
+
+<h3>Services</h3>
+<br />
+
+<div class="services_index">
+  <% @services.each do |service| %>
+    <div class='service'>
+      <%= link_to "Edit", edit_admin_service_path(service), :class => 'view_button' %>
+      <%# <%= link_to "Documentation", admin_service_documentation_path(service.service_documentation_page), :class => 'doc_button' %>
+      <h4><%= service.title %></h4></br>
+      <%= service.subtitle %>
+    </div>
+  <% end %>
+</div>
+
+<br />
+
+<%= link_to "New Service", new_admin_service_path(), :class => 'awesome green'  %>

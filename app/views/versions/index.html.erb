@@ -1,0 +1,12 @@
+<h2>Versions</h2>
+<ul>
+  <%- @versions.each do |version| %>
+    <li>
+      <%= version.version_hash %>
+      <br/>
+      <% version.api_tables.each do |at| %>
+        <%= link_to at.name, "/apps/#{params[:app_id]}/versions/#{version.version_hash}/#{at.name}" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

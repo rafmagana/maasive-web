@@ -1,0 +1,36 @@
+JSON:<br/>
+<textarea id='json' rows=20 cols=44>
+  {"users":{
+      "username":"String",
+      "password":"String"
+    },
+    "tasks": {
+      "name":"String",
+      "priority":"Integer",
+      "completed":"Boolean",
+      "completed_at":"Date",
+      "user_id":"Integer"
+    }
+  }
+</textarea>
+
+<br/>
+<a id='create_new_api' href='#' data-post-url="<%= app_versions_path(params[:app_id]) %>">Create new api version</a>
+
+<script type="text/javascript" charset="utf-8">
+  $('#create_new_api').click(function(e) {
+    e.preventDefault();
+    try
+      {
+        var json_data = JSON.parse($.trim($('#json').val()));
+        var url      = $(this).attr('data-post-url');
+        $.post(url, { version: json_data}, function(rs) {
+          $('body').append("Created version: <a href='/apps/"+rs.app_id+"/versions/"+rs.version_number+"'>"+rs.version_number+"</a>");
+        },'json');
+      }
+    catch(err)
+      {
+        alert(err);
+      }
+  });
+</script>

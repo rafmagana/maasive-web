@@ -1,0 +1,14 @@
+<div id="app_dashboard">
+  <div class='developer_index'>
+    <ul>
+      <%- @memberships.each do |membership| %>
+        <li>
+          <b><%= membership.developer.name %></b> <span class='aux_text'><%= membership.developer.email %></span>
+          <%= link_to "Remove", account_membership_path(@account, membership), :"data-method" => 'delete', :rel => 'nofollow', :'data-confirm' => "Are you sure?", :class => ''%>
+        </li>
+      <% end %>
+    </ul>
+    </br>
+    <%= link_to "+ Developer", new_account_membership_path, :class => ''  %>
+  </div>
+</div>

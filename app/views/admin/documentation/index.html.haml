@@ -1,0 +1,23 @@
+#help_center_container
+  .left_content.blah
+    = render 'documentation/sections_menu', :show_pages => true
+
+  .right_content
+    .right_inner_content
+      .help_section
+        %h4 ALL
+        .help_section_body
+          %ul
+            - @docs.each do |page|
+              %li= link_to page.title, documentation_path(page)
+
+:javascript
+  $(document).ready(function() {
+
+    $('.doc_nav h4').click(function() {
+      var p = $(this).parent();
+      p.find('ul').toggle();
+      $(this).toggleClass('collapsed');
+    });
+
+  });

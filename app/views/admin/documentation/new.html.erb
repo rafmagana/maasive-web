@@ -1,0 +1,12 @@
+<div class='form'>
+  <% semantic_form_for @doc, :url => documentation_index_path do |form| %>
+    <%= @doc.errors.full_messages.to_sentence %>
+  
+    <%= form.inputs :title, :markdown, :recommended, :section_title, :live %>
+  
+    <% form.buttons do %>
+      <%= form.commit_button :button_html => {:class => 'form_button_blue'}, :label => "Save" %>
+      <%= link_to 'Cancel' , documentation_index_path, :class=> 'form_button_grey' %>
+    <% end %>
+  <% end %>
+</div>

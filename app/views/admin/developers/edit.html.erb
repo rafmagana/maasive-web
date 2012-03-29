@@ -1,0 +1,48 @@
+<div class='form'>
+  <%= semantic_form_for @developer, :url => admin_developer_path(@developer) do |form| %>
+    <%= form.semantic_errors %>
+
+
+    <%= form.inputs do %>
+    
+       <%= form.input :name %>
+       <%= form.input :email %>
+
+       <%= form.input :beta_access %>
+       
+       <li>
+         <ol style='margin-left: 200px'>
+         <li>
+           <h2>Beta Levels</h2>
+         </li>
+         <% BetaAccess.constants.each do |c| %>
+
+            <li>
+              <%= c %>: <%= BetaAccess.const_get(c) %>
+            </li>
+         
+         <% end %>
+         <li>
+            <p>&nbsp;</p>
+          </li>
+       
+         <li>
+           <h2>Service Beta Levels</h2>
+         </li>
+         <% Service.all.each do |s| %>
+
+            <li>
+              <%= s.title %>: <%= s.beta_level %>
+            </li>
+         
+         <% end %>
+         </ol>
+      </li>
+       
+    <% end %>
+    <% form.buttons do %>
+      <%= form.commit_button :button_html=> {:class => 'form_button_blue'} %>
+      <%= link_to 'Cancel' , admin_developers_path(), :class=> 'form_button_grey' %>
+    <% end %>
+  <% end %>
+</div>

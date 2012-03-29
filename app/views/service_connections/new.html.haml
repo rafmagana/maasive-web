@@ -1,0 +1,12 @@
+.form
+  - semantic_form_for @service_connection, :url => app_service_service_connections_path(current_app.identifier, @service) do |form|
+    = form.semantic_errors
+  
+    %h2== Are you sure you want to enable #{@service.title} to #{current_app.name}
+    
+    %br
+  
+    - form.buttons do
+      = form.commit_button :button_html => {:class => 'submit_blue'}, :label => "Yes"
+      %li.fo_commit
+        = link_to 'No' , app_services_path(current_app.identifier), :class=> 'link_grey_button'

@@ -1,0 +1,26 @@
+#help_center_container
+  .left_content
+    = render :partial => 'sections_menu'
+
+  .right_content
+    .right_inner_content
+      #markdown
+        = BlueCloth.new(@page.markdown).to_html.html_safe
+- if current_developer and current_developer.admin?
+  %div#help_admin{:style => "clear: both; padding: 10px"}
+    %div{:style => "padding: 10px; background: #CBCBCB; border: 1px solid #646464; clear: both; margin-top 10px"}
+      %h3 Admin Controls
+      = link_to "Edit #{@page.title}", edit_documentation_path(@page)
+      |
+      \#{link_to "New",  new_documentation_path()}
+
+:javascript
+  $(document).ready(function() {
+    
+    $('.doc_nav h4').click(function() {
+      var p = $(this).parent();
+      p.find('ul').toggle();
+      $(this).toggleClass('collapsed');
+    });
+  
+  });

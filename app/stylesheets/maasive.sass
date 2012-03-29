@@ -1,0 +1,1091 @@
+@import "mixins", "reset", "colors"
+
+html
+  //background: url(/images/m_bg_tile.jpg) repeat-x top left #fcfcfc
+  font:
+    size: 13px
+  line-height: 19px
+
+p
+  line-height: 19px
+  margin: 0 0 10px
+  &:last-child
+    margin: 0    
+
+h1
+  font:
+    size: 36px
+    weight: bold
+
+h2
+  font:
+    size: 24px
+    weight: bold
+
+h3
+  font:
+    size: 18px
+    weight: bold
+
+h4
+  font:
+    size: 16px
+
+body.login_body
+  background: url(/images/middle_fade.png) no-repeat center 100px, url(/images/m_bg_tile.jpg) repeat-x top left #fcfcfc
+
+.container
+  margin: 0px auto
+  width: 1000px
+  &.login_container
+    margin: 0px auto 50px
+    width: 362px
+
+  .flash_message
+    padding: 10px
+    
+    &.notice
+      background: #D1FFDD
+      border: 10px solid #A1E2A5
+      color: #043903
+      
+    &.alert
+      background: #FFE0F5
+      border: 10px solid #E29BB1
+      color: #890002
+
+.main_button
+  @include roundcorners(6px)
+  @include bggradient($dark_blue, $light_blue)
+  display: block
+  border: 1px solid $dark_blue
+  color: #fff
+  cursor: pointer
+  font:
+    size: 12px
+  padding: 6px 10px 7px
+  float: right
+  &:hover
+    @include bggradient($light_blue, $dark_blue)
+    color: #fff
+   
+#logo
+  background: url(/images/logo.png) no-repeat
+  width: 161px
+  height: 32px
+  text-indent: -9000px
+  display: block
+  
+#signin_form
+  padding: 100px 0 0 0
+  width: 362px
+  #logo
+    margin: 0 auto 50px
+    background: url(/images/maas_logo_large.png) no-repeat
+    width: 362px
+    height: 308px
+  h2
+    margin: 0 0 10px
+    color: #008bcd
+    font:
+      weight: normal
+      size: 21px
+  #error_explanation
+    color: #9B1A00
+    h2
+      font-size: 12px
+      margin: 0 0 3px
+    li
+      list-style: disc
+      list-style-position: inside
+      font-size: 14px
+  .inputs
+    overflow: visible
+  .small_text
+    color: #999
+    font-style: italic
+    padding: 0 30px 0 0
+  li
+    position: relative
+    overflow: visible
+    font:
+      size: 18px
+    margin: 0
+    padding: 10px 0
+  textarea
+    width: 430px
+    padding: 10px
+    color: #333
+    font:
+      size: 18px
+      weight: 300
+  .developer_has_signed_nda
+    position: relative
+    top: 1px
+    input
+      margin: -3px 0 0 0
+      width: 15px
+      height: 15px
+
+  input
+    @include boxshadow(inset 0px 1px 3px rgba(0,0,0,.2))
+    @include roundcorners(4px)
+    border: 1px solid #ccc
+    width: 282px
+    height: 35px
+    padding: 10px
+    line-height: 35px
+    color: #999
+    font:
+      size: 18px
+      weight: 300
+    &.create, &#developer_submit
+      @include bggradient($dark_blue, $light_blue)
+      width: 307px
+      border: 1px solid $dark_blue
+      height: 50px
+      line-height: 21px
+      color: #fff
+      cursor: pointer
+      &:hover
+        @include bggradient($light_blue, $dark_blue)
+  label
+    @include transition()
+    @include textshadow(0 1px 2px rgba(0, 0, 0, .15))
+    position: absolute
+    padding: 0
+    top: 29px
+    left: 13px
+    color: #666  
+  &#developer_email_input 
+    .hot_field
+      left: -65px
+  &#developer_password_input 
+    .hot_field
+      left: -95px
+  .buttons
+    margin: 0px
+    padding: 0px 
+  .sub_links
+    margin: 50px 0 0 0
+    color: #999
+  .reset_pass
+    font-size: 12px
+
+  .clear
+    @include clearfix
+
+.flash_message
+  margin-top: 10px
+
+.maasive_header
+  @include clearfix
+  margin: 0
+  padding: 0
+
+  #menu
+    background: url(/images/header_nav_bg.png) no-repeat    
+    color: #687F94
+    width: 100%
+    height: 53px
+    margin: 8px 0 0 0
+    font:
+      size: 15px
+    position: relative
+    li
+      float: left
+      margin: 0
+      a
+        @include textshadow(0 0 2px rgba(0,0,0,.7))
+        display: block
+        font-weight: bold
+        padding: 19px 20px
+        color: #fff
+        background: url(/images/nav_partition.png) no-repeat right center
+        &.selected
+          color: #a4f6ff
+        &:hover
+          color: #a4f6ff
+      &.logo
+        margin: 5px 42px 0 45px
+        #logo
+          padding: 0
+          background: url(/images/maas_logo_small.png) no-repeat
+          width: 65px
+          height: 40px
+          text-indent: -9000px
+
+  #manage_account
+    text-align: right
+    margin: 10px 0 0 0
+    .name
+      text-transform: capitalize
+    a
+      margin: 0 0 0 10px
+            
+footer
+  .container
+    @include roundcorners(4px)
+    @include boxshadow(0 2px 2px rgba(0,0,0,.3))
+    background: #ccc
+    .content
+      padding: 10px 
+      .footer_nav
+        @include clearfix
+        li
+          margin: 0 20px 0 0
+          display: block
+          float: right
+          a
+            color: #808285
+            &:hover
+              color: #666
+
+#content
+  @include clearfix  
+
+#breadcrumbs
+  margin: 10px 0
+
+#about_us
+  margin: 50px auto 50px
+  font-size: 15px
+  h2
+    color: $beta_blue
+    margin: 0 0 10px
+
+#what_is_maasive
+  font:
+    size: 17px
+  color: #585858
+  section
+    background: url(/images/divider_tile.png) repeat-x top left
+    padding: 60px 0 0 0
+  h1, h2, h3
+    margin: 0 0 10px
+  h2
+    color: $beta_blue
+  p
+    &:last-child
+      margin-bottom: 20px
+  .text_container
+    padding: 0 30px
+  .image_placeholder
+    position: relative
+    background: #eee
+    border: 1px solid #ccc
+    &:before
+      @include transform(rotate(45deg))
+      content: ''
+      width: 10px
+      height: 50px
+      background: #ccc
+      position: absolute
+      top: 50%
+      left: 50%
+      margin-top: -20px 
+    &:after
+      @include transform(rotate(45deg))
+      content: ''
+      width: 50px
+      height: 10px
+      background: #ccc
+      position: absolute
+      top: 50%
+      left: 50%
+      margin-left: -20px
+      
+  #vision
+    @include clearfix
+    margin: 40px auto 10px
+    .image
+      float: left
+      width: 402px
+      height: 243px
+      background: url(/images/cloud_native.png) no-repeat bottom
+    .content
+      width: 527px
+      padding: 0 20px 0 0
+      float: right
+      h1
+        background: url(/images/vision_wide.png) no-repeat
+        width: 527px
+        height: 91px
+        text-indent: -9000px
+      h3
+        font-weight: normal
+        margin: 50px 0 0 0
+        color: #585858
+
+  #cross_platform
+    @include clearfix
+    margin: 0
+    .content
+      width: 100%
+      float: left  
+      h2
+        text-align: center  
+    .code_examples
+      @include clearfix
+      background: url(/images/phones.png) no-repeat top center
+      padding: 210px 0 20px 0
+      font:
+        family: "Monaco"
+        size: 10.5px
+      .type
+        width: 300px
+        padding: 0 0 0 20px
+        margin: 0 20px 0 0
+        float: left
+        &:last-child
+          margin: 0
+        .row
+          margin: 0 0 3px
+          &.ind
+            margin: 0 0 3px 10px
+          .blue
+            color: rgb(15, 36, 170)
+          .light_blue
+            color: rgb(110, 121, 240)
+          .un
+            text-decoration: underline
+    .text_container
+      padding-top: 20px
+      border-top: 1px solid #ddd
+      margin-top: 20px
+
+  #safer_code
+    @include clearfix
+    margin: 0 0
+    .image
+      background: url(/images/native.png) no-repeat center
+      margin: 30px 0
+      width: 100%
+      height: 280px
+    h2
+      text-align: center
+    .text_container
+      @include clearfix
+      p.column
+        display: block
+        float: left
+        width: 48%
+        margin: 0 4% 0 0
+        &:last-child
+          margin: 0
+      
+  #optimization
+    @include clearfix
+    margin: 0 0
+    .image
+      background: url(/images/bandwidth.png) no-repeat
+      width: 464px
+      height: 442px
+      float: left
+    .content
+      width: 48%
+      float: right
+
+#get_started_banner
+  @include clearfix
+  @include roundcorners(6px)
+  margin: 0 0 15px
+  padding: 2%
+  border: 1px solid #eee
+  .welcome_message
+    float: left
+    width: 30%
+    h2
+      font:
+        size: 24px
+        weight: bold
+      margin: 0 0 10px
+    p
+      font-size: 18px
+      b
+        font-weight: bold
+  .qs_link
+    @include roundcorners(6px)
+    @include transition(all .5s ease)
+    @include boxshadow(0 1px 1px rgba(120,120,120,.3))
+    display: block
+    float: left
+    margin: 0 0 0 2%
+    width: 21%
+    height: 140px
+    border: 1px solid #eee
+    text-indent: -9000px
+    &.ios
+      background: url(/images/ios.jpg) no-repeat center center
+    &.android
+      background: url(/images/android.jpg) no-repeat center center
+    &.win
+      background: url(/images/win.jpg) no-repeat center center
+    &:hover
+      @include boxshadow(0 0 4px $light_blue)
+      border: 1px solid $light_blue
+      
+.installers
+  margin: 50px auto
+  a
+    font-size: 17px
+    display: block
+    margin: 10px 0 0
+
+#dashboard
+  @include clearfix
+  margin: 50px 0
+  #dash_left
+    width: 70%
+    float: left
+  #dash_right
+    width: 27%
+    float: right
+    ul
+      li
+        margin: 20px 0 0 0
+        time
+          color: #999
+          display: block
+    #newsfeed
+      .twtr-hd, .twtr-ft
+        display: none
+      .twtr-tweet-wrap
+        padding: 15px 0
+        .twtr-tweet-text
+          color: #666 !important
+          a
+            color: #6D8B9B !important
+            &.twtr-user
+              display: block
+              color: #333 !important
+              font-weight: bold
+      
+      
+
+.accounts_header
+  @include clearfix
+  margin: 0 0 15px
+
+
+.accounts
+  @include clearfix
+  @include roundcorners(6px)
+  margin: 0 0 30px 0 
+  border: 1px solid $light_grey
+  background: #fff
+  .account_header
+    @include roundcorners(6px 6px 0 0)
+    @include bggradient($light_grey, #eee)
+    padding: 10px 15px
+    h2
+      font:
+        weight: 300
+        size: 18px
+    .header_button
+      font:
+        size: 11px
+        weight: 300
+      text-transform: lowercase
+  .left_content, .right_content
+    @include clearfix
+    
+  .left_content
+    float: left
+    width: 60% 
+    .apps  
+      padding: 15px
+      .app_header
+        line-height: 24px
+        margin: 0 0 10px
+        a.new_sub_header_button
+          float: right
+          color: $light_blue
+          padding: 2px 12px
+          font-size: 11px
+          &:hover
+            color: $dark_blue
+      .app
+        @include roundcorners(6px)
+        @include boxshadow(0 1px 1px rgba(120,120,120,.3))
+        margin: 8px 0 0 0
+        padding: 15px
+        background: #f3f3f3
+        border: 1px solid #ddd
+        &.no_apps
+          background: url(/images/arrow_no_app.png) no-repeat right
+          border: none
+          padding: 0
+          font-size: 13px
+          color: #999
+          @include boxshadow(0 0 0)
+          @include roundcorners(0px)
+        a
+          font:
+            size: 11px
+          margin: 0 15px 0 0
+        h3
+          margin: 0 0 10px
+          a
+            font:
+              weight: normal
+              size: 16px
+            color: #333
+            &:hover
+              color: $dark_blue
+
+  .right_content
+    float: right
+    width: 40%
+    .developers
+      padding: 15px 15px 15px 0px
+      .developers_header
+        line-height: 24px
+        margin: 0 0 10px
+        a.edit_sub_header_button
+          float: right
+          color: $light_blue
+          font-size: 11px
+          &:hover
+            color: $dark_blue
+      .developer
+        @include roundcorners(6px)
+        @include boxshadow(0 1px 1px rgba(120,120,120,.3))
+        margin: 8px 0 0 0
+        padding: 15px
+        background: #f3f3f3
+        border: 1px solid #ddd
+        font-weight: normal
+        .dev_name
+          margin: 0 0 10px
+          .dev_email
+            color: #666
+            font-size: 11px
+        a
+          font:
+            size: 11px
+            weight: 300
+          margin: 0 15px 0 0
+          
+    .services
+      h5
+        font-size: 11px
+        font-style: italic
+        line-height: 22px
+      ul.last
+        li
+          color: #7A7373
+          font-size: 12px
+          font-weight: normal
+        a
+          font-size: 12px
+          color: #687F94
+          font-style: normal
+          &:hover
+            color: grey
+
+      .services_header
+        color: #FFFFFF
+        line-height: 24px
+        margin:
+          top: 40px
+          bottom: 10px
+        h4
+          font-size: 16px
+        a.new_sub_header_button
+          float: right
+          color: #687F94
+          background: #212221
+          @include roundcorners(6px)
+          padding: 4px 6px
+          font-size: 10px
+          line-height: 14px
+          font-wieght: normal
+          font-style: normal
+          &:hover
+            color: grey
+
+.form
+  padding: 20px 0
+  font-size: 16px
+  a
+    font-style: normal
+  .buttons
+    padding: 0px
+  .main_button
+    font-size: 12px
+    line-height: 17px
+    float: left
+    margin: 0 10px 0 0
+    padding: 7px 10px 6px
+    
+  input.submit_blue
+    margin:
+      top: 1px
+    padding: 8px 12px
+    color: $light_grey
+    @include bggradient($dark_blue, $light_blue)
+    @include roundcorners(6px)
+    font-style: normal
+    font-size: 11px
+    border: none
+
+  .fo_commit
+    line-height: 29px
+    
+    .link_grey_button
+      margin: 0px
+      padding: 8px 12px
+      color: white
+      @include bggradient($grey, $light_grey)
+      @include roundcorners(6px)
+      font-style: normal
+      font-size: 11px
+      border: none
+
+#app_dashboard
+  @include roundcorners(6px)
+  @include boxshadow(0 1px 1px rgba(0,0,0,.3))
+  background: #fff
+  border: 1px solid $light_grey
+  margin: 20px 0 50px
+  #app_menu
+    @include clearfix
+    @include roundcorners(6px 6px 0 0)
+    @include bggradient(rgba(30,30,30,1), rgba(50,50,50,1))
+    color: #fff
+    padding: 7px 15px
+    margin: -1px -1px 0
+    #app_sub_menu
+      @include clearfix
+      width: 560px
+      float: right
+      .app_nav_button
+        float: right
+        padding: 9px 10px 10px
+        margin: 0 0 0 5px
+        &.selected
+          @include roundcorners(6px)
+          @include boxshadow(inset 0 -1px 0px #444, inset 0 0 5px #000)
+          background: #222
+          color: #fff
+    #app_information
+      float: left
+      margin: 7px 0 0 0
+      font:
+        weight: normal
+        style: italic
+  .app_key_info
+    padding: 15px
+  .form
+    padding: 20px 20px
+    label
+      width: 22%
+
+.app_info
+  color: #FFF
+  @include roundcorners(0 0 6px 6px)
+  padding: 20px 40px
+  font-size: 16px
+  a.new_sub_header_button
+    color: #687F94
+    background: #212221
+    @include roundcorners(6px)
+    padding: 2px 12px
+    font-size: 12px
+    font-wieght: normal
+    font-style: normal
+    &:hover
+      color: grey
+    font-style: normal
+
+.developer_index
+  @include roundcorners(6px)
+  padding: 20px 40px
+  font-size: 16px
+  a.new_sub_header_button
+    color: #687F94
+    background: #212221
+    @include roundcorners(6px)
+    padding: 2px 12px
+    font-size: 12px
+    font-wieght: normal
+    font-style: normal
+    &:hover
+      color: grey
+    font-style: normal
+  a
+    font-style: normal
+    
+#account_setting
+  h2
+    font:
+      size: 24px
+    color: $beta_blue
+    margin: 20px 0
+  .form
+    padding: 20px 0
+
+.empty_api_tables
+  @include roundcorners(0 0 6px 6px)
+  padding: 20px 
+
+ 
+.table_table, .api_table_table
+  width: 100%
+  th
+    padding: 10px 5px
+  td
+    padding: 5px    
+      
+.fade-container
+  overflow: hidden
+  height: 19px
+  line-height: 19px
+  width: 100%
+  position: relative
+  white-space: normal
+  
+.fade-content
+  float: left
+  position: relative
+  top: 0px
+  
+.ep_table_container
+  th
+    overflow: hidden   
+  td
+    overflow: hidden
+    
+.ep_table_container
+  padding-right: 54px
+
+.api_table_container, .ep_table_container
+  @include roundcorners(0 0 6px 6px)
+  color: #C0C0C0
+  padding:
+    bottom: 15px
+  margin:
+    bottom: 15px
+  &:last-child
+    margin:
+      bottom: 0
+  position: relative 
+  .ep_scrollbar_container
+    padding:
+      left: 15px
+    height: 12px
+
+    .ep_scrollbar
+      @include roundcorners(5px)
+      height: 10px
+      background: white
+      
+  .table_actions
+    float: right
+    padding: 10px
+  
+  .ep_table_header
+    clear: both
+    padding:
+      top: 15px
+    margin:
+      bottom: 15px
+ 
+  .table_title
+    margin-left: 15px
+    color: #877D7E
+    font-size: 13px
+    text-decoration: none
+  
+  .ep_metainfo
+    margin-right: -39px
+    color: #8E8485
+    font-size: 13px
+    float: right
+  
+  .ep_scroll_container
+    overflow: hidden
+      
+  .api_table_metainfo
+    float: right
+    width: 70%
+    text-align: right
+    text-shadow: 1px -1px 1px #222
+    color: #8E8485
+    line-height: 13px
+    padding: 12px 15px 3px  
+    font:
+      size: 12px
+      weight: normal
+      display: block
+
+  h3
+    padding: 12px 15px 3px
+    font:
+      size: 13px
+      weight: normal
+      display: block
+
+  .api_table, .ep_table
+    color: #E0E0E0
+    width: 100%
+
+    .action_row_header
+      width: 100px
+  
+    tr
+      font-size: 13px   
+      &:nth-child(odd)
+        background: #363737
+
+    th
+      color: #8E8485
+      background: #333333
+      font-size: 11px
+      text-shadow: 1px -1px 1px #222
+  
+    .api_table_row
+      cursor: pointer 
+      height: 40px   
+      td
+        padding:
+          top: 9px
+          bottom: 9px
+      
+    .ep_table_row
+      height: 24px
+
+    td
+      white-space: nowrap
+      padding:
+        left: 15px
+        right: 15px
+      
+    th
+      padding: 3px 15px 10px
+      
+    .ep_table_row        
+      .ep_actions
+        position: absolute
+        margin-top: -12px
+        right: 0px
+        background: #333333
+        padding: 6px
+        &:nth-child(odd)
+          background: #363737     
+        .lil_action
+          display: block
+          text-indent: -9000px
+          height: 12px
+          width:  21px
+          background: url(/images/actions_sprite.png)
+          float: left
+          &.edit:hover
+            background-position: 0px 13px
+          &.delete
+            background-position: 21px 0px
+            &:hover
+              background-position: 21px 13px
+            
+
+    .api_table_row:hover
+      background:
+        color: rgba(104, 127, 148, .3)
+  
+    .api_table_columns
+      width: 70%
+  
+    .api_table_version
+      width: 10%
+  
+    .api_table_created
+      width: 20%
+
+#charts-container
+  @include clearfix
+  @include roundcorners(0 0 6px 6px)
+
+.services_index
+  @include clearfix
+  @include roundcorners(0 0 6px 6px)
+  .left_content
+    @include clearfix
+    float: left
+    width: 45%
+    padding: 20px
+
+  .right_content
+    @include clearfix
+    float: right
+    width: 45%
+    padding: 20px
+
+  .service
+    @include bggradient($grey, $light_grey)
+    padding: 15px 30px 15px 15px
+    @include roundcorners(6px)
+    float: left
+    width: 80%
+    font-size: 11px
+    font-weight: normal
+    margin:
+      bottom: 12px
+    a.view_button
+      float: right
+      padding: 8px 12px
+      color: $light_grey
+      @include bggradient($dark_blue, $light_blue)
+      @include roundcorners(6px)
+      font-style: normal
+      font-size: 11px
+    a.doc_button
+      float: right
+      padding: 8px 12px
+      color: $light_grey
+      @include bggradient($dark_blue, $light_blue)
+      @include roundcorners(6px)
+      font-style: normal
+      font-size: 11px
+      margin-right: 2px
+
+    h4
+      font-size: 15px
+      font-weight: normal
+      margin:
+        bottom: 10px
+
+  h2
+    color: #FFFFFF
+    font-size: 15px
+    font-weight: normal
+    margin:
+      bottom: 20px
+
+.admin_index
+  color: #333
+  padding: 20px 40px
+  font-size: 16px
+  a.new_sub_header_button
+    color: #687F94
+    background: #212221
+    @include roundcorners(6px)
+    padding: 4px 14px
+    font-size: 14px
+    font-wieght: normal
+    font-style: normal
+    &:hover
+      color: grey
+    font-style: normal
+    
+#help_center_container
+  @include clearfix 
+  font:
+    weight: normal
+    size: 16px
+  line-height: 26px
+  margin: 50px 0
+
+  .left_content
+    @include roundcorners(4px)
+    @include bggradient(#ddd, #eee)
+    @include boxshadow(0 1px 1px rgba(0,0,0,.3))
+    float: right
+    width: 200px
+    &.cloud_9
+      position: fixed
+      top: 30px
+    #doc_search
+      padding: 5px 7px
+      border-bottom: 1px solid #ccc
+      input
+        @include roundcorners(13px)
+        -webkit-appearance: none
+        -webkit-box-sizing: content-box
+        width: 150px
+        padding: 3px 7px 3px 20px
+        background: url(/images/search_icon.png) no-repeat 5px 4px #fff
+        border: 1px solid #ccc
+    .doc_nav
+      h4
+        cursor: pointer
+        color: $light_blue
+        padding: 5px 22px
+        border-bottom: 1px solid #ccc
+        background: url(/images/arrow_blue_small_right.png) no-repeat 10px 14px
+        font:
+          size: 13px
+          weight: bold
+        &.collapsed
+          background: url(/images/arrow_blue_small_down.png) no-repeat 9px 16px
+      ul
+        @include boxshadow(inset 0 0 4px rgba(0,0,0,.3))
+        margin: 0
+        background: url(/images/dark_square_tile.jpg) repeat
+        padding: 5px 0
+        li
+          padding: 0 10px 0 24px
+          a
+            @include boxshadow(1px 0 1px, rgba(0,0,0,.75))
+            font-size: 12px
+            color: #eee
+      &:first-child
+        ul
+          display: block
+      &:last-child
+        ul
+          margin: 0 0 10px
+
+          
+  .right_content
+    float: left
+    width: 790px
+    .right_inner_content
+      padding: 0px 20px
+      h1.help_center_title
+        font-size: 30px
+        padding: 20px
+        margin:
+          top: -20px
+          bottom: 20px    
+      h4
+        margin: 0 0 18px
+        font-size: 18px
+        font-weight: bold  
+      .help_section_body
+        ul
+          a
+            padding: 0 0 0 25px
+            background: url(/images/doc_icon.png) no-repeat center left 
+
+
+.invite_request_list
+  margin:
+    top: 20px
+    left: 5px
+
+  li
+    padding:
+      bottom: 15px
+    p
+      padding:
+        left: 15px
+
+.olrk-fixed-left
+  right: 0px !important
+
+
+
+//@media screen and (min-width: 1024px)
+//  .container
+//    width: 960px
+//
+//@media screen and (min-width: 1280px)
+//  .container
+//    width: 1200px
+//
+//@media screen and (min-width: 1500px)
+//  .container
+//    width: 1480px
+
+

@@ -1,0 +1,5 @@
+%h1 Import Users (one email per line)
+= form_tag(import_admin_developers_path) do
+  = text_area_tag :users, "rmagana@elctech.com\nrmagana@maasiveapi.com\nrmagana@maasive.co", :cols => 60, :rows => 40
+
+  %p= submit_tag "Import"

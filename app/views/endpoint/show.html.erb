@@ -1,0 +1,7 @@
+<h1><%= params[:id] %></h1>
+
+<ol>
+  <% @api_table.schema.each do |k,v| %>
+    <li><%= k %>: <%= @instance.send(k) %></li>
+  <% end %>
+</ol>

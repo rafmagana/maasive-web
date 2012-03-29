@@ -1,0 +1,19 @@
+<div class='form'>
+  <%= semantic_form_for @app, :url => url do |form| %>
+    <%= form.inputs do %>
+      <%= form.input  :name  %>
+      <%= form.input  :account_id, :as => :select, :label => "Account", :collection => @accounts.map { |a| [a.name, a.id]}, :include_blank => false %>
+    <% end %>
+    <%= form.buttons do %>
+      <%= form.commit_button :button_html=> {:class => ''} %>
+      -
+      <%- unless @app.new_record? %>
+        <%= link_to 'Cancel' , app_statistics_path(:app_id => current_app.identifier), :class=> '' %>
+        -
+        <%= link_to "Delete App", app_path(@app.identifier), :"data-method" => 'delete', :rel => 'nofollow', :'data-confirm' => "Are you sure?", :class => ''%>
+      <% else %>
+        <%= link_to 'Cancel' , apps_path(), :class=> '' %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<div class='services_index'>
+  <div class='left_content'>
+    <div class='service'>
+      <%= link_to "Edit", edit_app_service_service_connections_path(current_app.identifier, @service_connection.service), :class => 'view_button' %>
+      <h4><%= @service_connection.service.title %></h4>
+    </div>  
+  </div>
+</div>

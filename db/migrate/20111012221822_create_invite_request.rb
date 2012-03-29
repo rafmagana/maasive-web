@@ -1,0 +1,15 @@
+class CreateInviteRequest < ActiveRecord::Migration
+  def self.up
+    create_table :invite_requests, :force => true do |t|
+      t.string :first_name
+      t.string :last_name
+      t.string :email
+      t.text   :why
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :invite_requests
+  end
+end

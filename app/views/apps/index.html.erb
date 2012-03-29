@@ -1,0 +1,16 @@
+<div class="container">
+  <ul id='app_list'>
+    <%- @apps.each do |app| %>
+      <li><b><%= app.name %></b> <span class='aux_text'><%= @accounts.detect { |a| a.id == app.account_id }.name %></span>
+        <br><%= app.identifier %> <%= link_to "Show", app_path(:id => app.identifier), :class => 'awesome orange menu first tiny' %><%= link_to "Edit", edit_app_path(:id => app.identifier), :class => 'awesome orange menu last tiny' %>
+      
+      <div class="links">
+        <%= link_to "Tables",     app_api_tables_path(:app_id => app.identifier), :class => 'awesome blue' %>
+        <%= link_to "Statistics", app_statistics_path(:app_id => app.identifier), :class => 'awesome blue' %>
+      </div>
+      </li>
+    <% end %>
+  </ul>
+  
+  <%= link_to "New App", new_app_path, :class => 'awesome green'  %>
+</div>

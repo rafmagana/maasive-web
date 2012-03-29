@@ -1,0 +1,87 @@
+!!!
+%html
+  %head
+    %title MaaSive
+    = stylesheet_link_tag 'jquery-ui.custom.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'services_base.css', :media => 'screen, projection'
+
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if IE]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = javascript_include_tag "jquery.min", "jquery_ujs", "underscore", "crypto-sha1", "backbone-min", "highcharts", "endpoint", "application"
+    = csrf_meta_tag
+  %body{:class => "#{"login_body" if login_page?}"}
+    - if login_page?
+      .container.login_container
+        = yield
+    - else
+      %header.maasive_header
+        %div{:style => "display: none;"}
+          = params[:controller]
+        .container
+          #manage_account
+            - if current_developer
+              Hello
+              %span.name
+                = current_developer.name if current_developer
+              = link_to "Edit Account", edit_developer_registration_path()
+              = link_to "Log out", destroy_developer_session_path
+            - else
+              = link_to "Log in", new_developer_session_path
+              = link_to "Invite request", new_invite_request_path
+            
+          %nav#menu
+            %ul
+              %li.logo= link_to "MAASIVE", "/", :id => "logo"
+              %li= link_to_unless_current("What Is Maasive?", what_is_maasive_path) { link_to "What Is Maasive?", what_is_maasive_path, :class => 'selected' }
+              %li= link_to_unless_current("Dashboard", dashboard_url) { link_to "Dashboard", dashboard_url, :class => 'selected' } if current_developer
+              %li= link_to_unless(params[:controller] == "documentation", "Documentation", documentation_index_path) { link_to "Documentation", documentation_index_path, :class => 'selected' }
+              %li= link_to_unless_current("About Us", "/about") { link_to "About Us", about_path, :class => 'selected' }
+              - if current_developer and current_developer.admin?
+                %li= link_to_unless(params[:controller].match(/^admin/), "Admin", admin_dashboard_path) { link_to "Admin", admin_dashboard_path, :class => 'selected' }
+      .container
+        #breadcrumbs
+          = render_breadcrumbs
+        - if notice
+          %p.flash_message.notice
+            = notice
+        - if alert
+          %p.flash_message.alert
+            = alert
+      - if current_developer && current_app
+        .container
+          #app_dashboard
+            %nav#app_menu
+              %ul#app_sub_menu
+                %li= link_to "Edit App", edit_app_path(current_app.identifier),                    :class => selected_app_tab_class('app_nav_button', :edit)
+                %li= link_to "Keys", app_path(current_app.identifier),                             :class => selected_app_tab_class('app_nav_button', :keys)
+                - if current_developer.has_access_to_beta_level(BetaAccess::Services)
+                  %li= link_to "Services", app_services_path(:app_id => current_app.identifier),   :class => selected_app_tab_class('app_nav_button', :services)
+                %li= link_to "Tables",     app_api_tables_path(:app_id => current_app.identifier), :class => selected_app_tab_class('app_nav_button', :tables)
+                %li= link_to "Statistics", app_statistics_path(:app_id => current_app.identifier), :class => selected_app_tab_class('app_nav_button', :stats)
+              %h3#app_information= current_app.name
+            = yield
+
+      - else  
+        - if params[:controller] == "dashboards"
+          = yield
+        - else
+          .container
+            = yield
+    
+    = render :partial => "layouts/footer"
+
+    - if Rails.env != 'development'
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-16660681-5']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    
+    = yield :javascript

@@ -1,0 +1,10 @@
+.bundle
+db/*.sqlite3
+log/*.log
+coverage
+.rake_tasks~
+tmp/**/*
+.DS_Store
+public/stylesheets/*.css
+.sass-cache
+maasiveAPI

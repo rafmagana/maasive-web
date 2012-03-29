@@ -1,0 +1,22 @@
+
+#signin_form
+  %a#logo{:href => "#"} MaaSive
+  %h2 Join Our Beta
+  = semantic_form_for @invite do |form|
+    - form.inputs do
+      = form.input :email, :label_html => { :style => 'width: auto'}
+      = link_to "Have an invite code?", "#_", :id => "show_invite_code"
+      = form.input :invite_code, :label_html => { :style => 'width: auto'}
+    - form.buttons do
+      = form.commit_button 'Request an Invite'
+  .sub_links
+    Already have an account
+    = link_to "log in here", new_developer_session_path
+    %br
+    = link_to "Forgot your password?", new_password_path(:developer)
+
+%script{:charset => "utf-8", :type => "text/javascript"}
+  $(function() {
+  DRMagicLabelWizzler('#invite_request_email_input');
+  //DRMagicLabelWizzler('#invite_request_invite_code_input');
+  });

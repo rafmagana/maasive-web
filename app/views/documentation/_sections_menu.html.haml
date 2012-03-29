@@ -1,0 +1,8 @@
+#doc_search
+  = render :partial => 'documentation/search_form'
+- @sections.each do |section|
+  .doc_nav
+    %h4= section.title
+    %ul{:style => "display: #{(show_pages ||= false) ? 'block' : 'none'};"}
+      - section.documentation_pages.by_position.each do |page|
+        %li= link_to page.title, documentation_path(page)

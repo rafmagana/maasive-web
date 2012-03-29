@@ -1,0 +1,10 @@
+%h4 Search results for "#{@terms}"
+- if @results.present?
+  - @results.each do |page|
+    = link_to page.title, documentation_path(page)
+    %br
+- else
+  No results matching your search were found
+
+%br
+= link_to 'Go back to the Documentation page', documentation_index_path

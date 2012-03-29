@@ -1,0 +1,11 @@
+<div class='form'>
+  <%= semantic_form_for @account do |form| %>
+    <%= form.inputs do %>
+      <%= form.input :name  %>
+    <% end %>
+    <%= form.buttons do %>
+      <%= form.commit_button :button_html=> {:class => 'form_button_blue'} %>
+      <%= link_to 'Cancel' , accounts_path, :class=> 'form_button_grey' %>
+    <% end %>
+  <% end %>
+</div>

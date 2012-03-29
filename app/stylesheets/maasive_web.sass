@@ -1,0 +1,34 @@
+@import "mixins", "reset", "colors"
+
+
+body
+  font:
+    //family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif
+    family: "Myrid Pro", Arial, sans-serif
+    weight: 300
+    size: 13px
+  color: #231F20
+  a
+    text-decoration: none
+    color: $light_blue
+    outline: none
+    &:hover
+      color: $dark_blue 
+
+.formtastic
+  input[type=text], input[type=password], input[type=email]
+    padding: 5px 10px
+
+
+.blue_button
+  @include roundcorners(6px)
+  @include bggradient($dark_blue, $light_blue)
+  border: 1px solid $dark_blue
+  color: #fff
+  cursor: pointer
+  font:
+    size: 12px
+  padding: 6px 10px 7px
+  &:hover
+    @include bggradient($light_blue, $dark_blue)
+    color: #fff

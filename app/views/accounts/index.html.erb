@@ -1,0 +1,31 @@
+<ul class='little_list'>
+  <%- @accounts.each do |acct| %>
+    <li><b><%= acct.name %></b> <%= link_to "Edit", edit_account_path(:id => acct.id), :class => 'awesome orange menu first tiny' %><%= link_to "Developers", account_memberships_path(:account_id => acct.id), :class => 'awesome orange menu last tiny' %>
+      <div class='account_developers'>
+        <h4>Developers:</h4>
+        <ul>
+          <% acct.developers.each do |dev| %>
+            <li><%= dev.name %> <span class='aux_text'><%= dev.email %></span></li>
+          <% end %>
+        <ul>
+      </div>
+      
+      <div class='account_developers'>
+        <h4>Applications:</h4>
+        <ul>
+          <% acct.apps.each do |app| %>
+            <li><%= app.name %> <span class='aux_text'><%= app.identifier %></span>
+              <div class="links">
+                <%= link_to "Tables",     app_api_tables_path(:app_id => app.identifier), :class => 'awesome blue' %>
+                <%= link_to "Versions",   app_versions_path(:app_id => app.identifier), :class => 'awesome blue' %>
+                <%= link_to "Statistics", app_statistics_path(:app_id => app.identifier), :class => 'awesome blue' %>
+              </div>
+            </li>
+          <% end %>
+        <ul>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Account", new_account_path, :class => 'awesome green'  %>

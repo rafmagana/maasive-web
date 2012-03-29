@@ -1,0 +1,10 @@
+%h3 Invite Requets
+
+%ul.invite_request_list
+  - @invite_requests.each do |ir|
+    %li
+      == #{ir.first_name} #{ir.last_name}
+      = ir.email
+      == (#{ir.invite_code.blank? ? 'no code' : ir.invite_code})
+      = link_to "Invite", invite_admin_invite_request_path(:id => ir.id) 
+      %p= ir.why

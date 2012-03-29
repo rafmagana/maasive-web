@@ -1,0 +1,45 @@
+<div id="mongo_stats">
+  
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  
+  var JPStatDizzle = function(selector) {
+    this.selector = selector;
+    this.parent_element = $(selector);
+  };
+  
+  JPStatDizzle.prototype.show = function(json) {
+    var object = JSON.parse(json);
+    
+    function showObject(ele, object) {
+      
+      $.each(object, function(key, value) {
+                
+        switch(typeof(value))
+        {
+        case 'string':
+        case 'number':
+        case 'boolean':
+          ele.append("<div style='padding-top:10px;'>" + key + " : " + value.toString() +  "</div>");
+          break;
+        case 'object':
+          var sub_ele = $('<div />', { css: { 'margin-left': '10px', 'padding-top':"10px" }});
+          ele.append("<div style='padding-top:10px;'>" + key +  "</div>");
+          ele.append(sub_ele);
+          showObject(sub_ele, value);
+          break;
+        default:
+        }
+      });
+      
+    };
+    
+    showObject(this.parent_element, object);
+    
+  };
+  
+  var mongo_stats = new JPStatDizzle('#mongo_stats');
+  mongo_stats.show('<%= @stats.to_json.html_safe %>');
+  
+</script>
