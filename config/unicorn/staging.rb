@@ -12,22 +12,20 @@ preload_app true
 timeout 30
 
 # Listen on a Unix data socket
-listen '/srv/www/staging.maasiveapi.com/proxy.sock', :backlog => 2048
+listen '/your/path/to/proxy.sock', :backlog => 2048
 
-stderr_path "/srv/www/staging.maasiveapi.com/shared/log/unicorn.stderr.log"
-stdout_path "/srv/www/staging.maasiveapi.com/shared/log/unicorn.stdout.log"
+stderr_path "/your/path/to/unicorn.stderr.log"
+stdout_path "/your/path/to/unicorn.stdout.log"
 
-pid "/srv/www/staging.maasiveapi.com/shared/pids/unicorn.pid"
+pid "/your/path/to/unicorn.pid"
 
 ##
 # REE
 
-# http://www.rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 if GC.respond_to?(:copy_on_write_friendly=)
   #preload_app true
   GC.copy_on_write_friendly = true
 end
-
 
 before_fork do |server, worker|
   #defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
@@ -80,7 +78,7 @@ after_fork do |server, worker|
     end
   rescue => e
     if Rails.env == 'development'
-      STDERR.puts "couldn't change user, oh well"
+      STDERR.puts "couldn't change user."
     else
       raise e
     end

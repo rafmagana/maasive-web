@@ -5,7 +5,7 @@ require 'core_extentions'
 
 ActionView::Template.register_template_handler :md, lambda {|template| "%q{<div id='markdown'>} + BlueCloth.new(#{template.source.inspect}).to_html + %q{</div>}" }
 
-ActionMailer::Base.default :from => 'MaaSive Support <support@maasive.co>'
+ActionMailer::Base.default :from => 'MaaSive Support <support@domain.com>'
 
 
 # Initialize the rails application

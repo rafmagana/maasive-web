@@ -2,10 +2,10 @@ require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'rvm/capistrano'
 
-server 'maas-web01.elctech.net', :app, :web, :primary => true
-server 'maas-web02.elctech.net', :app, :web
-#server 'maas-web03.elctech.net', :app, :web
-#server 'maas-web04.elctech.net', :app, :web
+server 'your_server_01', :app, :web, :primary => true
+server 'your_server_02', :app, :web
+server 'your_server_03', :app, :web
+server 'your_server_04', :app, :web
 
 set :deploy_env,  "production"
 set :app_dir_name, "#{application}"
