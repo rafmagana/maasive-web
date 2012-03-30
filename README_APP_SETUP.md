@@ -70,10 +70,19 @@ Edit *config/database.yml* accordingly then
 
     $ rake db:setup
 
-This will create an user you can use to log into the application
+### Test users
+
+At this point you have an admin and a regular user to login with, these are the credentials:
+
+Admin
 
     email = admin@domain.com
-    password = loremipsum
+    password = loremadmin
+
+Regular
+
+	email = user@domain.com
+	password = loremipsum
 
 ### Run your server
 
