@@ -2,9 +2,9 @@
 
 Our application is broken out into two main parts:
 
-* *MaaSive Web*, a Rails app made for front end users to login and setup
+* [*MaaSive Web*](https://github.com/elc/maasive-web), a Rails app made for front end users to login and setup
   their mobile apps. This is also where documentation and statistics are viewed.
-* *MaaSive API*, a Node.js app for the frameworks (iOS, Windows Phone,
+* [*MaaSive API*](https://github.com/elc/maasive-api), a Node.js app for the frameworks (iOS, Windows Phone,
   Android) to connect only.
 
 Both applications use mySQL 5.5.* and MongoDB 2.0.*.
@@ -12,23 +12,33 @@ Both applications use mySQL 5.5.* and MongoDB 2.0.*.
 There are also services (like push or email) that have their own setup
 processes.
 
+Although we recommend you to install the software specific versions mentioned in this guide, if you already have MongoDB, mySQL, Ruby, the Bundler gem and Node.js working in your system skip to and [Clone repository](#clonerepo)
+
 ## Before starting
 
 Make sure you have the building tools necessary to compile C and C++ applications (make, gcc, g++, etc)
 
 ### Mac users
 
-Make sure you have *Xcode 4.2* at least
+Install *Xcode 4.2* at least, make sure you install the Command Line Tools.
 
 ### Linux users
 
-You can find the tools in the *build-essential* package (Debian or Debian-based), the *Development Tools* group (CentOS, RedHat, Fedora), etc.
+#### Debian or Debian-based distros 
 
-## Installing databases
+	$ sudo apt-get install build-essential
+	
+#### Red Hat or Red Hat-based distros (CentOS, Fedora)
 
-### Install MongoDB 2.0.*
+	$ yum groupinstall "Development Tools"
+	
+or
 
-### Install mySQL 5.5
+	$ yum install gcc gcc-c++ kernel-devel
+	
+## Database engines
+
+Make sure you have [MongoDB 2.0.*](http://www.mongodb.org/downloads) and [mySQL 5.5](http://dev.mysql.com/downloads/mysql/) up and running
 
 ## Getting MaaSive Web (Rails) application running
 
@@ -55,7 +65,7 @@ We use ruby-1.9.2-p180 via RVM
 
     $ rvm use ruby-1.9.2-p180@maasive --create
 
-### Clone repository
+### <a name='clonerepo'></a> Clone repository
 
     $ git clone git@github.com:elc/maasive-web.git
     $ cd maasive-web
@@ -92,40 +102,4 @@ Then log into [http://localhost:3000/](http://localhost:3000/) with your email a
 
 ## Getting MaaSive API (Node.js) application running
 
-### Install NVM (https://github.com/creationix/nvm)
-
-    git clone git://github.com/creationix/nvm.git ~/.nvm
-
-To activate NVM, you need to source it from your bash shell:
-
-    . ~/nvm/nvm.sh
-
-You can add this line to .bash\_profile, .profile, .bashrc, etc.
-
-### Node.js 0.4.12
-
-    $ nvm install v0.4.12
-    $ node -v
-	  v0.4.12
-
-If you want to come back to the Node version installed in your system
-
-    $ nvm deactivate
-
-### Install dependencies using NPM (Node Package Manager)
-
-	$ npm install
-	
-### Setup the database
-
-Edit your database users in *config.json*
-
-### Run your server
-
-	$ node server.js
-	
-### Configure frameworks
-
-Point your iOS, Android and Windows Phone frameworks to 
-
-		http://localhost:3001/
+[Click here to go to the instructions to setup MaaSive API locally](https://github.com/elc/maasive-api/blob/master/README_APP_SETUP.md)
