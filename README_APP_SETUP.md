@@ -12,7 +12,7 @@ Both applications use mySQL 5.5.* and MongoDB 2.0.*.
 There are also services (like push or email) that have their own setup
 processes.
 
-Although we recommend you to install the software specific versions mentioned in this guide, if you already have MongoDB, mySQL, Ruby, the Bundler gem and Node.js working in your system skip to and [Clone repository](#clonerepo)
+Although we recommend you to install the software specific versions mentioned in this guide, if you already have MongoDB, mySQL, Ruby, the Bundler gem and Node.js working in your system skip to [Clone repository](#clonerepo)
 
 ## Before starting
 
