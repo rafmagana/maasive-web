@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
       if resource.is_a?(Developer)
-        resource.admin? ? admin_invite_requests_path : what_is_maasive_path
+        resource.admin? ? admin_dashboard_path : what_is_maasive_path
       else
         welcome_index_path(resource)
       end

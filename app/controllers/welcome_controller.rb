@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-    path = current_developer ? dashboard_path : new_invite_request_path
+    path = current_developer ? dashboard_path : new_developer_session_path
     redirect_to path and return
   end
 
