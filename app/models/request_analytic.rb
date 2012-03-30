@@ -43,7 +43,7 @@ class RequestAnalytic
     h = {}
     self.collection.map_reduce(self.map_hourly, self.reduce_hourly, :query => query, :out => { :inline => 1}, :raw => true)["results"].each do |f| 
       h[f["_id"].to_i.to_s] = f["value"]["count"]
-    end
+    end if self.exists?
     h
   end
   
@@ -76,7 +76,7 @@ class RequestAnalytic
     h = {}
     self.collection.map_reduce(self.map_device, self.reduce_device, :query => query, :out => { :inline => 1}, :raw => true)["results"].map do |f| 
       [f["_id"], f["value"]["count"]]
-    end
+    end if self.exists?
   end
   
   def self.map_device
@@ -108,10 +108,10 @@ class RequestAnalytic
     starting_time = ending_time - 24.hours  
     query.merge!({:epoc_created_at => {:$gt => starting_time.to_i, :$lt => ending_time.to_i}})
     # ((Time.now - Time.now.beginning_of_day) / 1.hour).floor
-    h = {}
-    self.collection.map_reduce(self.map_table, self.reduce_table, :query => query, :out => { :inline => 1}, :raw => true)["results"].map do |f| 
+    h = self.collection.map_reduce(self.map_table, self.reduce_table, :query => query, :out => { :inline => 1}, :raw => true)["results"].map do |f| 
       {:name => f["_id"], :data => [f["value"]["count"]]}
-    end
+    end if self.exists?
+    h
   end
   
   def self.map_table
