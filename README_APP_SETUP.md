@@ -66,7 +66,7 @@ We use ruby-1.9.2-p180 via RVM
 
 ### Setup the database
 
-Edit config/database.yml accordingly then
+Edit *config/database.yml* accordingly then
 
     $ rake db:setup
 
@@ -96,10 +96,27 @@ You can add this line to .bash\_profile, .profile, .bashrc, etc.
 ### Node.js 0.4.12
 
     $ nvm install v0.4.12
-    $ nvm use v0.4.12
+    $ node -v
+	  v0.4.12
 
 If you want to come back to the Node version installed in your system
 
-    # nvm deactivate
+    $ nvm deactivate
 
-### Installing NPM (Node Package Manager)
+### Install dependencies using NPM (Node Package Manager)
+
+	$ npm install
+	
+### Setup the database
+
+Edit your database users in *config.json*
+
+### Run your server
+
+	$ node server.js
+	
+### Configure frameworks
+
+Point your iOS, Android and Windows Phone frameworks to 
+
+		http://localhost:3001/
