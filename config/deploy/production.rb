@@ -12,6 +12,4 @@ set :app_dir_name, "#{application}"
 set :deploy_to, "#{app_parent_path}#{app_dir_name}"
 set :rails_env,   "#{deploy_env}"
 
-set :unicorn_binary, "unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn/#{rails_env}.rb"
-set :unicorn_pid,    "#{shared_path}/pids/unicorn.pid"

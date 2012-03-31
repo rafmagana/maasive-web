@@ -8,3 +8,5 @@ set :deploy_env,  "staging"
 set :app_dir_name, "#{deploy_env}.#{application}"
 set :deploy_to, "#{app_parent_path}#{app_dir_name}"
 set :rails_env,   "#{deploy_env}"
+
+set :unicorn_config, "#{current_path}/config/unicorn/#{rails_env}.rb"
