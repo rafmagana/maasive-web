@@ -21,6 +21,7 @@ gem 'unicorn'
 
 gem 'capistrano'
 gem 'capistrano-ext'
+gem 'rvm-capistrano'
 
 gem 'ruby-debug19', :require => 'ruby-debug'
 
