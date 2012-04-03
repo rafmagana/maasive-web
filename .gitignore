@@ -22,3 +22,6 @@ pickle-email-*.html
 public/stylesheets/*.css
 rerun.txt
 tmp/**/*
+Vagrantfile
+.vagrant
+puppet
